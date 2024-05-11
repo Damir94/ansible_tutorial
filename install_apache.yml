@@ -8,8 +8,10 @@
     yum:
       update_cache: yes
       state: latest
+    when: ansible_distribution == "CentOs"
 
   - name: install apache package
     yum:
       name: httpd
+    when: ansible_distribution == "CentOs"
         
