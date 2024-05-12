@@ -4,14 +4,12 @@
   become: true
   tasks:
 
-  - name: update repository index
+  - name: install apache and php packages
     yum:
-      update_cache: yes
+      name:
+         - "{{ apache_package }}"
+         - "{{ php_package }}"
       state: latest
-    when: ansible_distribution == "CentOs"
+      update_cache: yes
 
-  - name: install apache package
-    yum:
-      name: httpd
-    when: ansible_distribution == "CentOs"
-        
+
