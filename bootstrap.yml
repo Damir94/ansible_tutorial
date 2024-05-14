@@ -1,0 +1,38 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+ 
+  - name: install updates (CentOS)
+    tags: always
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create simone user
+    tags: always
+    user:
+      name: simone
+      groups: root 
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDcFOgdRTsZYdJnamfQtoE9OfB3gAiM702P9ySzskGMD8rW2e8ueBmL2Ggnax4pUDeybP8zDk2ONPZpWYDjxwc/rok/Y9V8aRuIDR8JRka/gWpngit3j/IQFvl7h6OIQnTq2Rgj0/+auXew34tltS+ChXfdrGXh8L5TTMhVryAW7QWbYnzZcOxVKlHoe1C2sCfExxhY8PSQxTbmAGSPbkaEHkszZb37IHQjqv1rGaNSer/8ra7f+Z+te3YKQwrpKwzF7YSReHhuMy0EXPwFk0MHwQC4IX5HYzX6FYrVjMAvSYrDeaayBqfkzq/f1hrmMVWA2IrA7sJyHxNfFwJ6T3Fx ansible@server-001-182.ziyotek.net" 
+
+
+  - name: add sudoers file for simone
+    tags: always
+    copy:
+      src: sudoer_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root
+      mode: 0440    
+
