@@ -1,3 +1,4 @@
+
 - name: install mariadb server package (CentOS)
   tags: centos,db,mariadb
   yum:
