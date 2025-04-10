@@ -1,3 +1,4 @@
+
 ---
 - name: Install Apache and starts the service
   hosts: web_servers
